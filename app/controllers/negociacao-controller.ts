@@ -1,3 +1,4 @@
+import { NegociacoesView } from './../views/negociacoes-view.js';
 import { Negociacoes } from './../models/negociacoes.js';
 import { Negociacao } from './../models/negociacao.js';
 
@@ -6,17 +7,19 @@ export class NegociacaoController {
     private inputquantidade:HTMLInputElement;
     private inputValor:HTMLInputElement;
     private negociacoes = new Negociacoes();
+    private negociacoesView = new NegociacoesView('#negociacoesView');
 
     constructor(){
         this.inputData = document.querySelector("#data");
         this.inputquantidade = document.querySelector("#quantidade");
         this.inputValor = document.querySelector("#valor");
+        this.negociacoesView.update(this.negociacoes);
     }
 
     adiciona(): void{
        const negociacao = this.criaNegociacao();
        this.negociacoes.adiciona(negociacao);
-       console.log(this.negociacoes.lista());
+       this.negociacoesView.update(this.negociacoes);
        this.limpaFormulario();
     }
 
